@@ -607,6 +607,11 @@ M.select = function(opts, callback)
         args = { filebufnr },
         mods = mods,
       })
+
+      if is_directory and not opts.preview and preview_win then
+        vim.cmd.edit({ bang = true })
+      end
+
       if opts.preview then
         vim.api.nvim_set_option_value("previewwindow", true, { scope = "local", win = 0 })
         vim.w.oil_entry_id = entry.id
